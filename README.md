@@ -18,6 +18,8 @@ This program is used by SMD Chemnitz for checking the vaccination qr codes and s
 
 2022, Jan Martin Reckel
 
+The vacdec module (files inside the `vacdec`-folder) comes from [this repository](https://github.com/HQJaTu/vacdec) and has been published as public domain (unlicenced).
+
 This program may be used by beneficial organizations for their events (cultural events, church services, etc.). Any other use then that needs the permission of the author.
 
 **Important**: Please be aware that you should handle the data of the registered persons carefully and in accordance with data protection laws! Just delete the JSON-files when the deadline has been riched.
