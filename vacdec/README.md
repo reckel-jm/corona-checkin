@@ -1,4 +1,4 @@
-**The vacdec files are taken from [this Github Repo]{https://github.com/HQJaTu/vacdec} and are published under the UNLICENCED licence, that's why I copy it into my project. You find the original README below:**
+**The vacdec files are taken from [this Github Repo](https://github.com/HQJaTu/vacdec) and are published under the UNLICENCED licence, that's why I copy it into my project. You find the original README below:**
 
 # vacdec
 
