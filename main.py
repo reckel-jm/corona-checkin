@@ -194,7 +194,7 @@ class App():
         string = "Details of Vaccination:"
         for k, v in infos.items():
             string = string + str(k) + ' : ' + str(v) + "\n"
-        return string
+        return string.strip()
         
 def main():
     #print(returnCameraIndexes())
