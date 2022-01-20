@@ -1,4 +1,7 @@
+**The vacdec files are taken from [this Github Repo]{https://github.com/HQJaTu/vacdec} and are published under the UNLICENCED licence, that's why I copy it into my project. You find the original README below:**
+
 # vacdec
+
 Python script to decode the EU Covid-19 vaccine certificate, as [specified by the EU](https://ec.europa.eu/health/ehealth/covid-19_en).
 
 This script takes an image with a QR code of a vaccine certificate as
