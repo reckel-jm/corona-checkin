@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import cv2
 import numpy as np
@@ -25,7 +26,9 @@ def returnCameraIndexes():
         i -= 1
     return arr
 
+
 class App():
+
     def __init__(self):
         self.app = QtWidgets.QApplication(sys.argv)
         self.window = uic.loadUi("qt.ui")
@@ -33,10 +36,10 @@ class App():
         self.window.scanqrcodebutton.clicked.connect(self.guiScanQR)
         self.window.buttonOkay.clicked.connect(self.finish)
         self.window.setWindowIcon(QtGui.QIcon('logo.png'))
-        #window.tabWidget.setTabEnabled(1, False)
+        # window.tabWidget.setTabEnabled(1, False)
         today = date.today()
         self.filename = today.strftime('%Y-%m-%d.json')
-        self.registrationinfo = {'persons' : []}
+        self.registrationinfo = {'persons': []}
         self.__reset()
         self.openFileifExists()
         cameras = returnCameraIndexes()
@@ -82,7 +85,7 @@ class App():
 
         for obj in barcode:
             points = obj.polygon
-            (x,y,w,h) = obj.rect
+            (x, y, w, h) = obj.rect
             pts = np.array(points, np.int32)
             pts = pts.reshape((-1, 1, 2))
             cv2.polylines(image, [pts], True, (0, 255, 0), 3)
@@ -91,7 +94,7 @@ class App():
             barcodeType = obj.type
             string = "Data " + str(barcodeData) + " | Type " + str(barcodeType)
 
-            cv2.putText(image, string, (x,y), cv2.FONT_HERSHEY_SIMPLEX,0.8,(255,0,0), 2)
+            cv2.putText(image, string, (x,y), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 2)
             shellexcape = barcodeData.replace("$", "\\$")
             shellexcape.replace("\\", "\\\\")
             output = subprocess.getstatusoutput('python vacdec/vacdec --raw-string "' + shellexcape + '" --certificates-directory vacdec/certs --certificate-db-json-file vacdec/certs/roots/Digital_Green_Certificate_Signing_Keys.json')
@@ -106,7 +109,8 @@ class App():
             return output
         return False
 
-    def parseOutput(self,output):
+    def parseOutput(self, output):
+
         if output.find("Signature verified ok") != -1:
             print('QR-Code is valid')
         else:
@@ -128,7 +132,7 @@ class App():
             ret, frame = cap.read()
             qrdetected = self.decoder(frame)
             cv2.putText(frame, 'Bitte Covid-Pass zeigen', (100, 100), cv2.FONT_HERSHEY_SIMPLEX,0.8,(255,0,0), 2)
-            imageshow = cv2.imshow('Impfausweis scannen', frame)
+            cv2.imshow('Impfausweis scannen', frame)
             code = cv2.waitKey(10)
             if code == ord('q') or qrdetected != False:
                 cv2.destroyAllWindows()
@@ -146,7 +150,7 @@ class App():
 
     def finish(self):
         now = datetime.now()
-        now_string = dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        now_string = now.strftime("%d/%m/%Y %H:%M:%S")
         if self.window.editName.text() == '' or self.window.editName.text() == '' or (self.curQRValid == False and self.window.editPhone.text() == ''):
             error = QtWidgets.QMessageBox()
             error.setWindowTitle("Fehler")
@@ -195,11 +199,13 @@ class App():
         for k, v in infos.items():
             string = string + str(k) + ' : ' + str(v) + "\n"
         return string.strip()
-        
+
+
 def main():
-    #print(returnCameraIndexes())
+    # print(returnCameraIndexes())
     app = App()
     app.start()
+
 
 if __name__ == "__main__":
     main()
