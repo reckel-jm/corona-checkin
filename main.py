@@ -70,6 +70,12 @@ class App():
         self.window.tabWidget.setTabEnabled(1, True)
         self.window.tabWidget.setCurrentIndex(1)
         self.window.tabWidget.setTabEnabled(0, False)
+        if self.curVaccineJson != None:
+            self.window.vacDataResult.show()
+            string = self.getImportantVaccineInfoAsString()
+            self.window.vacDataResult.setPlainText(string)
+        else:
+            self.window.vacDataResult.hide()
 
     def decoder(self,image):
         gray_img = cv2.cvtColor(image,0)
@@ -105,17 +111,18 @@ class App():
         if output.find("Signature verified ok") != -1:
             print('QR-Code is valid')
         else:
+            self.showErrorQRNotValid()
             print("No Validation possible. Print whole Output:")
             print(output)
             return
         pos = output.find("JSON: ")
         if pos != -1:
-            print('Versuche das Parsen')
+            #print('Versuche das Parsen')
             json_string = output[pos+len("JSON: "):output.rfind('}')+1]
-            print(json_string)
             vacdata = json.loads(json_string)
+            self.curVaccineJson = vacdata
             self.registrationinfo['persons'].append((vacdata['Health certificate']["1"]["Name"]))
-            print(self.registrationinfo)
+            #print(self.registrationinfo)
 
     def startDecoderLoop(self):
         cap = cv2.VideoCapture(int(str(self.window.cameraCombo.currentText())))
@@ -132,6 +139,13 @@ class App():
                     self.parseOutput(qrdetected)
                 return False
         return qrdetected
+
+    def showErrorQRNotValid(self):
+        error = QtWidgets.QMessageBox()
+        error.setWindowTitle("Fehler")
+        error.setText("Der QR-Code ist nicht gültig! Bitte manuell überprüfen!")
+        error.exec_()
+        return
 
     def finish(self):
         now = datetime.now()
@@ -165,6 +179,9 @@ class App():
         self.window.editFirstName.setText("")
         self.window.editName.setText("")
         self.window.editPhone.setText("")
+        self.curVaccineJson = None
+        self.window.vacDataResult.setPlainText("")
+        self.window.vacDataResult.hide()
 
     def openFileifExists(self):
         if os.path.exists(self.filename):
@@ -174,6 +191,15 @@ class App():
                 except:
                     return
 
+    def getImportantVaccineInfoAsString(self):
+        infos = self.curVaccineJson['Health certificate']['1']['Vaccination'][0]
+        infos['Birthday of Vaccinated Person'] = self.curVaccineJson['Health certificate']['1']['Date of birth']
+        string = "Details of Vaccination:"
+        print(infos)
+        for k, v in infos.items():
+            string = string + str(k) + ' : ' + str(v) + "\n"
+        return string
+        
 def main():
     #print(returnCameraIndexes())
     app = App()

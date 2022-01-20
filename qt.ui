@@ -30,7 +30,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Willkommen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Welcome">
        <property name="toolTip">
@@ -88,7 +88,7 @@
         <string>2. Kontakterfassung</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QFormLayout" name="formLayout_2">
           <item row="0" column="0">
            <widget class="QLabel" name="label1">
@@ -132,6 +132,13 @@
           </item>
          </layout>
         </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="buttonOkay">
+          <property name="text">
+           <string>Okay!</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
@@ -142,12 +149,8 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="buttonOkay">
-          <property name="text">
-           <string>Okay!</string>
-          </property>
-         </widget>
+        <item row="1" column="0">
+         <widget class="QPlainTextEdit" name="vacDataResult"/>
         </item>
        </layout>
       </widget>
@@ -156,9 +159,7 @@
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="images.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>editPhone</sender>
