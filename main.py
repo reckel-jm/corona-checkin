@@ -8,9 +8,7 @@ import subprocess
 import json
 import sys
 from datetime import date, datetime
-from PyQt5 import QtWidgets, uic
-
-#CAMERADEVICENUM = 2
+from PyQt5 import QtWidgets, uic, QtGui
 
 
 def returnCameraIndexes():
@@ -34,6 +32,7 @@ class App():
         self.window.noqrcodebutton.clicked.connect(self.guiNoQR)
         self.window.scanqrcodebutton.clicked.connect(self.guiScanQR)
         self.window.buttonOkay.clicked.connect(self.finish)
+        self.window.setWindowIcon(QtGui.QIcon('logo.png'))
         #window.tabWidget.setTabEnabled(1, False)
         today = date.today()
         self.filename = today.strftime('%Y-%m-%d.json')
@@ -117,12 +116,10 @@ class App():
             return
         pos = output.find("JSON: ")
         if pos != -1:
-            #print('Versuche das Parsen')
             json_string = output[pos+len("JSON: "):output.rfind('}')+1]
             vacdata = json.loads(json_string)
             self.curVaccineJson = vacdata
             self.registrationinfo['persons'].append((vacdata['Health certificate']["1"]["Name"]))
-            #print(self.registrationinfo)
 
     def startDecoderLoop(self):
         cap = cv2.VideoCapture(int(str(self.window.cameraCombo.currentText())))
@@ -195,7 +192,6 @@ class App():
         infos = self.curVaccineJson['Health certificate']['1']['Vaccination'][0]
         infos['Birthday of Vaccinated Person'] = self.curVaccineJson['Health certificate']['1']['Date of birth']
         string = "Details of Vaccination:"
-        print(infos)
         for k, v in infos.items():
             string = string + str(k) + ' : ' + str(v) + "\n"
         return string
