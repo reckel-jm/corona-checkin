@@ -30,7 +30,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Willkommen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Welcome">
        <property name="toolTip">
@@ -142,7 +142,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte nun den Gast, mit der Corona-Warn-App einzuchecken. Falls der Gast diese App nicht besitzt, trage bitte unten noch die Telefonnummer ein.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Please ask the guest now to check in via Corona Warn App. If the guest doesn't use this app, please add his phone number below.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bitte nun den Gast, mit der Corona-Warn-App einzuchecken. Falls der Gast diese App nicht besitzt, trage bitte unten noch die Telefonnummer ein. &lt;span style=&quot; font-weight:600;&quot;&gt;Nachname und Vorname müssen auf jeden Fall ausgefüllt sein&lt;/span&gt;.&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Please ask the guest now to check in via Corona Warn App. If the guest doesn't use this app, please add his phone number below. &lt;span style=&quot; font-weight:600;&quot;&gt;Sur- and forename have to be given.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
