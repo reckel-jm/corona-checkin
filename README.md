@@ -18,4 +18,6 @@ This program is used by SMD Chemnitz for checking the vaccination qr codes and s
 
 2022, Jan Martin Reckel
 
-Any other use then for SMD Chemnitz without permission is not allowed.
+This program may be used by beneficial organizations for their events (cultural events, church services, etc.). Any other use then that needs the permission of the author.
+
+**Important**: Please be aware that you should handle the data of the 
