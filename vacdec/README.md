@@ -2,7 +2,7 @@
 
 # vacdec
 
-Python script to decode the EU Covid-19 vaccine certificate, as [specified by the EU](https://ec.europa.eu/health/ehealth/covid-19_en).
+Python script to decode the EU Covid-19 vaccine certificate, as [specified by the EU](https://ec.europa.eu/health/ehealth/covid-19_en)
 
 This script takes an image with a QR code of a vaccine certificate as
 the parameter and will show the certificate's content.
