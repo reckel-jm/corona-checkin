@@ -74,6 +74,8 @@ class App():
         self.window.tabWidget.setTabEnabled(0, False)
         if self.curVaccineJson != None:
             self.window.vacDataResult.show()
+            #cert = list(self.curVaccineJson['Health certificate']['1'])[0]
+            #if cert
             string = self.getImportantVaccineInfoAsString()
             self.window.vacDataResult.setPlainText(string)
         else:
@@ -127,6 +129,9 @@ class App():
 
     def startDecoderLoop(self):
         cap = cv2.VideoCapture(int(str(self.window.cameraCombo.currentText())))
+        focus = 0
+        #cap.set(cv2.CAP_PROP_AUTOFOCUS, 0)
+        #cap.set(cv2.CAP_PROP_FOCUS, focus)
         qrdetected = False
         while qrdetected == False:
             ret, frame = cap.read()
@@ -193,9 +198,10 @@ class App():
                     return
 
     def getImportantVaccineInfoAsString(self):
-        infos = self.curVaccineJson['Health certificate']['1']['Vaccination'][0]
+        cert = list(self.curVaccineJson['Health certificate']['1'])[0]
+        string = "Certificate is about a " + cert + "\n" + "\n"
+        infos = self.curVaccineJson['Health certificate']['1'][cert][0]
         infos['Birthday of Vaccinated Person'] = self.curVaccineJson['Health certificate']['1']['Date of birth']
-        string = "Details of Vaccination:"
         for k, v in infos.items():
             string = string + str(k) + ' : ' + str(v) + "\n"
         return string.strip()
